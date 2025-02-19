@@ -65,9 +65,12 @@ Several plugins require additional Lua configurations, including:
 > - Press o to open the file in a new buffer or open/close directory.
 > - Press t to open the file in a new tab. 
 > - Press i to open the file in a new horizontal split.
+> - Press I Toggle hidden files.
 > - Press s to open the file in a new vertical split.
 > - Press p to go to parent directory.
 > - Press r to refresh the current directory.
+> - Press R to refresh the current root.
+
 - `<leader>so`: Save and reload `.vimrc`.
 
 #### Search & Navigation
