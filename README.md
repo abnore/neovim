@@ -58,6 +58,7 @@ Several plugins require additional Lua configurations, including:
 
 ### Key Mappings
 #### File Navigation
+> :help NERDTreeMappings
 - `<C-f>`: Focus NERDTree.
 - `<C-t>`: Toggle NERDTree.
 - `<F8>`: Toggle Tagbar.
@@ -70,6 +71,7 @@ Several plugins require additional Lua configurations, including:
 > - Press p to go to parent directory.
 > - Press r to refresh the current directory.
 > - Press R to refresh the current root.
+> - Press m to open NERDTree menu
 
 - `<leader>so`: Save and reload `.vimrc`.
 
