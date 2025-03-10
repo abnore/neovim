@@ -1,6 +1,6 @@
 set nowrap
-set number
 set relativenumber
+set number
 
 set smartindent
 set tabstop=8
@@ -13,6 +13,10 @@ set scrolloff=8
 
 set nohls
 set incsearch
+
+set undofile        " Enable persistent undo
+set undodir=~/.config/nvim/undo " Set directory for undo files
+
 
 filetype plugin indent on
 
@@ -32,7 +36,6 @@ Plug 'https://github.com/preservim/tagbar' " Tagbar for code navigation
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'} " syntax highlighting
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'lervag/vimtex'
-Plug 'tpope/vim-fugitive' "Git wrapper
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.5' }
 Plug 'https://github.com/mg979/vim-visual-multi', {'branch': 'master'}
@@ -40,6 +43,7 @@ Plug 'stevearc/oil.nvim'
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'OXY2DEV/markview.nvim'
 Plug 'nvim-treesitter/nvim-treesitter-context'
+Plug 'projekt0n/github-nvim-theme'
 
 call plug#end()
 " --------- plug commands ------------
@@ -63,10 +67,14 @@ require('telescope').setup{
   pickers = {
     find_files = {
       theme = "dropdown",
+    },
+    colorscheme = {
+      enable_preview = true, -- This makes it preview as you scroll
     }
   },
   extensions = {}
 }
+
 require('nvim-web-devicons').setup {}
 require('oil').setup {
     view_options = {
@@ -90,7 +98,6 @@ require'treesitter-context'.setup{
   zindex = 20, -- The Z-index of the context window
   on_attach = nil, -- (fun(buf: integer): boolean) return false to disable attaching
 }
-
 STOP
 
 let mapleader = " "
@@ -118,9 +125,14 @@ nnoremap <silent> N Nzz
 inoremap <silent> <C-b> {}<Left><CR><ESC>O
 inoremap <silent> <C-k> ()<Left>
 
-inoremap <silent> ± \
+inoremap <silent> æ }
+inoremap <silent> Æ ]
+inoremap <silent> ø {
+inoremap <silent> Ø [
+inoremap <silent> Å \|
+inoremap <silent> å \
 
-nnoremap <leader>ff <cmd>Telescope find_files<cr>
+nnoremap <leader><leader> <cmd>Telescope find_files<cr>
 nnoremap <leader>fg <cmd>Telescope live_grep<cr>
 nnoremap <leader>fb <cmd>Telescope buffers<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
@@ -129,7 +141,7 @@ nnoremap <leader>gc <cmd>Telescope git_commits<cr>
 nnoremap <leader>of <cmd>Telescope oldfiles<cr>
 
 nnoremap <silent> <leader>so :w <CR> :source $MYVIMRC<CR>
-
+nnoremap <silent> <leader>w :w <CR>
 
 " Function to toggle comments on selected lines
 function! ToggleComment()
@@ -147,23 +159,5 @@ endfunction
 
 " Mapping <leader>co to the toggle comment function
 vnoremap <leader>co :<C-u>call ToggleComment()<CR>
-
-" Using the block above instead - thanks gpt!
-" Commenting out one or more lines in C files
-"vnoremap <leader>co :s/^/\/\//<CR>
-" Uncommenting one or more lines in C files
-"vnoremap <leader>cu :s/^\/\/<CR>
-
-" Turning off arrow keys until i am comfortable without
-noremap <Up> <Nop>
-noremap <Down> <Nop>
-noremap <Left> <Nop>
-noremap <Right> <Nop>
-
-" The following lines are for insert mode
-inoremap <Up> <Nop>
-inoremap <Down> <Nop>
-inoremap <Left> <Nop>
-inoremap <Right> <Nop>
 
 :colorscheme tokyonight-night
