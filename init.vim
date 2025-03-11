@@ -17,13 +17,25 @@ set incsearch
 set undofile        " Enable persistent undo
 set undodir=~/.config/nvim/undo " Set directory for undo files
 
+set lazyredraw
+set updatetime=300
 
 filetype plugin indent on
 
-" remove trailing whitespace on save
-autocmd BufWritePre * :%s/\s\+$//e
+if has("mac") || has("win32") || has("win64")
+    set clipboard^=unnamedplus  " Use system clipboard on macOS/Windows
+elseif has("unix")
+    if executable("xclip") || executable("xsel")
+        set clipboard^=unnamedplus  " Use system clipboard if xclip/xsel is installed
+    else
+        set clipboard^=unnamed      " Fallback to PRIMARY selection on X11
+    endif
+endif
 
-call plug#begin()
+ " remove trailing whitespace on save
+ autocmd BufWritePre * :%s/\s\+$//e
+
+ call plug#begin()
 
 Plug 'https://github.com/vim-airline/vim-airline'
 Plug 'https://github.com/preservim/nerdtree' "
@@ -142,6 +154,7 @@ nnoremap <leader>of <cmd>Telescope oldfiles<cr>
 
 nnoremap <silent> <leader>so :w <CR> :source $MYVIMRC<CR>
 nnoremap <silent> <leader>w :w <CR>
+nnoremap <silent> <leader>q :q <CR>
 
 " Function to toggle comments on selected lines
 function! ToggleComment()
