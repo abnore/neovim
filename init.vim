@@ -3,10 +3,6 @@ set relativenumber
 set number
 
 set smartindent
-set tabstop=8
-set shiftwidth=8
-set softtabstop=8
-set expandtab
 
 set mouse=a
 set scrolloff=8
@@ -20,7 +16,22 @@ set undodir=~/.config/nvim/undo " Set directory for undo files
 set lazyredraw
 set updatetime=300
 
+let g:c_syntax_for_h = 1
+
+" Ensure filetype detection is on
+filetype on
 filetype plugin indent on
+
+" Set tab width based on file type
+augroup filetype_tab_settings
+    autocmd!
+
+    " Python and C use 4 spaces per tab
+    autocmd FileType python,c,cpp,asm,objc setlocal tabstop=4 shiftwidth=4 expandtab
+
+    " VHDL uses 2 spaces per tab
+    autocmd FileType vhdl,vhd setlocal tabstop=2 shiftwidth=2 expandtab
+augroup END
 
 if has("mac") || has("win32") || has("win64")
     set clipboard^=unnamedplus  " Use system clipboard on macOS/Windows
@@ -174,3 +185,4 @@ endfunction
 vnoremap <leader>co :<C-u>call ToggleComment()<CR>
 
 :colorscheme tokyonight-night
+
