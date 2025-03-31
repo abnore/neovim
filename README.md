@@ -1,121 +1,160 @@
 # Vim Configuration README
 
 ## Overview
-This document describes a custom Vim configuration designed to enhance workflow, productivity, and ease of navigation. It includes settings for indentation, syntax highlighting, UI enhancements, plugin management, key mappings, and additional quality-of-life features.
+This document describes a custom Neovim configuration designed to enhance workflow, productivity, and ease of navigation. It includes settings for indentation, UI, plugin management, key mappings, and more.
 
 ## Features
 
 ### General Settings
 - **Line Numbering**: Enables both absolute (`set number`) and relative numbering (`set relativenumber`) for easier navigation.
-- **Indentation**: Uses smart indentation (`set smartindent`) and a tab width of 8 spaces (`set tabstop=8`, `set shiftwidth=8`, `set softtabstop=8`, `set expandtab`).
-- **Scrolling Behavior**: Keeps 8 lines visible above and below the cursor when scrolling (`set scrolloff=8`).
-- **Mouse Support**: Enables mouse interaction (`set mouse=a`).
+- **Indentation**: Smart indentation is enabled (`set smartindent`). Tab width is set *per file type*:
+  - Python, C, C++, ASM, Objective-C → 4 spaces
+  - VHDL → 2 spaces
+- **Scrolling**: Keeps 8 lines visible above and below the cursor when scrolling (`set scrolloff=8`).
+- **Mouse Support**: Enables full mouse support (`set mouse=a`).
 - **Search Behavior**:
-  - Disables search highlight (`set nohls`).
-  - Enables incremental search (`set incsearch`).
+  - Disables persistent search highlight (`set nohls`)
+  - Enables incremental search (`set incsearch`)
+- **Persistent Undo**: Enabled with undo files stored in `~/.config/nvim/undo`
+- **Clipboard Integration**:
+  - macOS/Windows: Uses system clipboard via `unnamedplus`
+  - Linux: Uses `xclip`/`xsel` if available, or falls back to `unnamed`
+- **Performance**:
+  - Lazy redraw for better performance (`set lazyredraw`)
+  - Faster update time (`set updatetime=300`)
+- **Trailing Whitespace**: Automatically removed on save
 
-### Automatic Trailing Whitespace Removal
-- Removes trailing whitespace upon saving files using an auto-command:
-  ```vim
-  autocmd BufWritePre * :%s/\s\+$//e
-  ```
+## Plugin Management
 
-### Plugin Management
-Uses `vim-plug` to manage various plugins that enhance Vim's functionality. Plugins included:
-- **UI Enhancements**:
-  - `vim-airline`: Status line for improved visibility.
-  - `tokyonight.nvim`: Color scheme.
-  - `nvim-web-devicons`: Icons support.
-  - `oil.nvim`: File explorer replacement.
-  - `vim-css-color`: CSS color preview.
-  - `awesome-vim-colorschemes`: Collection of color schemes.
-  - `markview.nvim`: Markdown preview.
-  
-- **Navigation & Productivity**:
-  - `NERDTree`: File explorer.
-  - `telescope.nvim`: Fuzzy finder for files, buffers, and more.
-  - `tagbar`: Code navigation using ctags.
-  - `vim-tmux-navigator`: Seamless navigation between Vim and tmux.
-  
-- **Syntax Highlighting & Code Editing**:
-  - `nvim-treesitter`: Advanced syntax highlighting and parsing.
-  - `treesitter-context`: Shows context at the top while scrolling.
-  - `vimtex`: LaTeX support.
-  - `vim-fugitive`: Git integration.
-  - `vim-visual-multi`: Multi-cursor support.
-  
-#### Plugin Installation & Management
-- **Install plugins**: `:PlugInstall`
-- **Clean unused plugins**: `:PlugClean`
-- **Update plugins**: `:UpdateRemotePlugins`
+Uses [`vim-plug`](https://github.com/junegunn/vim-plug) for plugin management.
 
-### Lua Configurations
-Several plugins require additional Lua configurations, including:
-- **Treesitter** for syntax highlighting and code parsing.
-- **Telescope** for fuzzy finding.
-- **Oil.nvim** for file navigation.
-- **Treesitter Context** for displaying context while scrolling.
+### Plugins
 
-### Key Mappings
-#### File Navigation
-> :help NERDTreeMappings
-- `<C-f>`: Focus NERDTree.
-- `<C-t>`: Toggle NERDTree.
-- `<F8>`: Toggle Tagbar.
->Use the natural Vim navigation keys hjkl to navigate the files.
-> - Press o to open the file in a new buffer or open/close directory.
-> - Press t to open the file in a new tab. 
-> - Press i to open the file in a new horizontal split.
-> - Press I Toggle hidden files.
-> - Press s to open the file in a new vertical split.
-> - Press p to go to parent directory.
-> - Press r to refresh the current directory.
-> - Press R to refresh the current root.
-> - Press m to open NERDTree menu
+#### UI & Appearance
+- `tokyonight.nvim`: Clean modern theme (`colorscheme tokyonight-night`)
+- `vim-airline`: Status bar
+- `nvim-web-devicons`: Developer file icons
+- `vim-css-color`: CSS color preview
+- `awesome-vim-colorschemes`: Additional retro color themes
+- `oil.nvim`: Minimalistic file explorer
 
-- `<leader>so`: Save and reload `.vimrc`.
+#### Navigation & Productivity
+- `NERDTree`: File explorer sidebar
+- `tagbar`: Code navigation with ctags
+- `telescope.nvim`: Powerful fuzzy finder
+- `vim-tmux-navigator`: Seamless navigation between Vim and tmux
+- `vim-visual-multi`: Multi-cursor editing
 
-#### Search & Navigation
-- `<C-d>`, `<C-u>`: Scrolls half a page and centers the cursor.
-- `n`, `N`: Centers the cursor when navigating search results.
+#### Syntax & Language Support
+- `nvim-treesitter`: Syntax highlighting and parsing
+- `nvim-treesitter-context`: Sticky code context window
+- `vimtex`: LaTeX support
+- `plenary.nvim`: Required for Telescope and other Lua plugins
 
-#### Editing Enhancements
-- `J`: Joins lines while keeping the cursor in place.
-- `dd`: Deletes a line without copying it to clipboard.
-- `J`, `K` in visual mode: Moves selected text up/down.
+#### Plugin Setup Commands
+```vim
+:PlugInstall        " Install plugins
+:PlugClean          " Remove unused plugins
+:UpdateRemotePlugins
+```
+## Lua Configuration
 
-#### Commenting
-- `<leader>co`: Toggles comments in visual mode (supports `//`-style comments).
+### Treesitter
+Treesitter is configured to automatically install and highlight support for:
+- `javascript`, `typescript`, `lua`, `vim`, `objc`, `json`, `html`, `rust`, `c`, `python`, `markdown`
 
-#### Telescope Commands
-- `<leader>ff`: Find files.
-- `<leader>fg`: Live grep.
-- `<leader>fb`: List buffers.
-- `<leader>fh`: Help tags.
-- `<leader>gf`: Git files.
-- `<leader>gc`: Git commits.
-- `<leader>of`: Old files.
+### Telescope
+Telescope includes fuzzy finding for files, buffers, git history, help tags, and more. It is configured to:
+- Use a dropdown theme for file search
+- Enable live preview when scrolling through colorschemes
 
-### Arrow Keys Disabled
-- Arrow keys are disabled in normal and insert modes to encourage using `h`, `j`, `k`, `l` for movement.
+### Oil.nvim
+A lightweight file explorer:
+- Shows hidden files
+- Displays icons using `nvim-web-devicons`
 
-### Color Scheme
-- Uses `tokyonight-night` as the default color scheme.
+### Treesitter Context
+Displays the current function, class, or block at the top of your window while scrolling. It includes:
+- Cursor-based context tracking
+- Optional line limit
+- Optional z-index and trimming behavior
+
+---
+
+## Key Mappings
+
+### File Navigation
+- `<C-f>`: Focus NERDTree
+- `<C-t>`: Toggle NERDTree
+- `<F8>`: Toggle Tagbar
+
+### Telescope
+- `<leader><leader>`: Find files
+- `<leader>fg`: Live grep
+- `<leader>fb`: List buffers
+- `<leader>fh`: Help tags
+- `<leader>gf`: Git files
+- `<leader>gc`: Git commits
+- `<leader>of`: Recently opened files
+
+### Editing Enhancements
+- `J`: Joins lines while keeping the cursor in place
+- `dd`: Deletes a line **without** yanking it
+- Visual `J` / `K`: Moves selected lines down/up
+- `<C-d>`, `<C-u>`: Scroll half-page and center the cursor
+- `n`, `N`: Center the screen when jumping to search results
+- `<C-b>`: Insert `{}` with newline in insert mode
+- `<C-k>`: Insert `()` in insert mode
+
+### Special Character Mappings
+Insert-mode mappings for fast symbol input:
+- `æ`: `}`
+- `Æ`: `]`
+- `ø`: `{`
+- `Ø`: `[`
+- `Å`: `|`
+- `å`: `\`
+
+### Commenting
+- `<leader>co`: Toggle `//` comments on selected lines (visual mode)
+
+### Misc
+- `<leader>so`: Save and reload `init.vim`
+- `<leader>w`: Save file
+- `<leader>q`: Quit
+
+---
+
+## Color Scheme
+
+- Default theme: `tokyonight-night`
+
+---
 
 ## Installation & Setup
-1. Install `vim-plug` if not already installed:
-   ```sh
-   curl -fLo ~/.vim/autoload/plug.vim --create-dirs \\
-       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-   ```
-2. Copy this configuration to your `.vimrc` or `init.vim` (for Neovim).
-3. Open Vim and run `:PlugInstall` to install plugins.
-4. Restart Vim to apply changes.
+
+1. **Install vim-plug**:
+```sh
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+```
+
+2. **Copy the configuration** into your Neovim config directory:
+```sh
+mkdir -p ~/.config/nvim
+cp init.vim ~/.config/nvim/init.vim
+```
+3. **Launch Neovim** and install plugins:
+```sh
+:PlugInstall
+```
+4. **Restart Neovim** and apply all changes
+
 
 ## Notes
-- The configuration is designed for both Vim and Neovim.
-- Plugins requiring external dependencies (like `telescope.nvim` or `nvim-treesitter`) may need additional setup.
-- The Lua-based configurations require Neovim for full functionality.
 
-This setup optimizes Vim for a modern coding workflow with improved navigation, syntax highlighting, and customization options.
-
+- **Built for Neovim**, not legacy Vim
+- **Lua-based plugins** require Neovim **0.5+**
+- Some plugins may need external tools:
+  - `xclip` or `xsel` for clipboard support on Linux
+  - `ctags` for Tagbar navigation

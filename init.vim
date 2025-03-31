@@ -64,7 +64,6 @@ Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.5' }
 Plug 'https://github.com/mg979/vim-visual-multi', {'branch': 'master'}
 Plug 'stevearc/oil.nvim'
 Plug 'kyazdani42/nvim-web-devicons'
-Plug 'OXY2DEV/markview.nvim'
 Plug 'nvim-treesitter/nvim-treesitter-context'
 Plug 'projekt0n/github-nvim-theme'
 
