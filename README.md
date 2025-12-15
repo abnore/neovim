@@ -116,7 +116,7 @@ Themes in use:
 ## Installation
 
 ```sh
-git clone https://github.com/abnore/nvim ~/.config/nvim
+git clone https://github.com/abnore/neovim ~/.config/nvim
 ```
 
 Start Neovim.
