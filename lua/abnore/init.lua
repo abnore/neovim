@@ -6,21 +6,12 @@ local autocmd = vim.api.nvim_create_autocmd
 
 local abnoreGroup = augroup("abnore", {})
 
--- Highlight on yank
-autocmd("TextYankPost", {
-    group = abnoreGroup,
-    callback = function()
-        vim.highlight.on_yank({
-            higroup = "IncSearch",
-            timeout = 40,
-        })
-    end,
-})
-
--- Ensure Tree-sitter for C/C++
+-- Ensure Tree-sitter starts on a filetype
 autocmd("FileType", {
     group = abnoreGroup,
-    pattern = { "c", "cpp" },
+    pattern = {"c", "cpp", "python", "cs", "go", "bash", "zsh", 
+                "markdown", "markdown_inline", "lua", "rust", 
+                "javascript", "vimdoc"},
     callback = function(args)
         if not vim.treesitter.highlighter.active[args.buf] then
             vim.treesitter.start(args.buf)
@@ -40,6 +31,16 @@ autocmd("FileType", {
 --    end,
 --})
 
+-- Highlight on yank
+autocmd("TextYankPost", {
+    group = abnoreGroup,
+    callback = function()
+        vim.highlight.on_yank({
+            higroup = "IncSearch",
+            timeout = 40,
+        })
+    end,
+})
 -- netrw tweaks
 vim.g.netrw_browse_split = 0
 vim.g.netrw_banner = 0

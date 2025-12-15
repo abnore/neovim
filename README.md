@@ -66,16 +66,20 @@ design starting with this base.
 
 ## Tree-sitter
 
-Tree-sitter is enabled with automatic parser installation.
+Tree sitter will no longer auto install languages. 
+An autocmd will therefore need to be written that starts treesitter
+on FileType and languages will need to be written in if you want syntax
 
 Languages configured:
-- c, cpp
+- c, cpp, cs
 - lua
-- bash
+- bash, zsh
 - go
 - rust
-- javascript, typescript
+- javascript
 - vimdoc
+- markdown
+- python
 
 ---
 
