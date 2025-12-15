@@ -9,8 +9,8 @@ local abnoreGroup = augroup("abnore", {})
 -- Ensure Tree-sitter starts on a filetype
 autocmd("FileType", {
     group = abnoreGroup,
-    pattern = {"c", "cpp", "python", "cs", "go", "bash", "zsh", 
-                "markdown", "markdown_inline", "lua", "rust", 
+    pattern = {"c", "cpp", "python", "cs", "go", "bash", "zsh",
+                "markdown", "markdown_inline", "lua", "rust",
                 "javascript", "vimdoc"},
     callback = function(args)
         if not vim.treesitter.highlighter.active[args.buf] then

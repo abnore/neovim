@@ -66,9 +66,15 @@ design starting with this base.
 
 ## Tree-sitter
 
-Tree sitter will no longer auto install languages. 
+Tree sitter will no longer auto install languages.
+first install the cli tool to get the parsers
+
+```sh
+brew install tree-sitter-cli
+```
+
 An autocmd will therefore need to be written that starts treesitter
-on FileType and languages will need to be written in if you want syntax
+on `FileType` and languages will need to be written in if you want syntax for them
 
 Languages configured:
 - c, cpp, cs
@@ -123,7 +129,7 @@ Themes in use:
 git clone https://github.com/abnore/neovim ~/.config/nvim
 ```
 
-Start Neovim.
+Start Neovim. Install tree-sitter-cli
 Plugins install automatically via lazy.nvim.
 
 ---
