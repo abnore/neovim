@@ -1,9 +1,20 @@
 -- Leader
 vim.g.mapleader = " "
 
+-- Special characters
+vim.keymap.set("i", "å", "\\")
+vim.keymap.set("i", "Å", "|")
+vim.keymap.set("i", "ø", "{")
+vim.keymap.set("i", "Ø", "[")
+vim.keymap.set("i", "æ", "}")
+vim.keymap.set("i", "Æ", "]")
+
+-- Saving and exiting
+vim.keymap.set( "n", "<leader>w", vim.cmd.w)
+vim.keymap.set( "n", "<leader>q", vim.cmd.x)
+
 -- File / navigation
-vim.keymap.set("n", "<leader>pv", vim.cmd.Oil)
-vim.keymap.set("n", "<leader>bd", vim.cmd.bd)
+vim.keymap.set("n", "-", "<CMD>Oil --float<CR>", { desc = "Open parent directory" })
 
 -- Move selected lines
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv", { silent = true })
