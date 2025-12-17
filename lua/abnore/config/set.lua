@@ -38,3 +38,4 @@ vim.opt.listchars = {
   extends = "»",
   precedes = "«",
 }
+
