@@ -2,7 +2,7 @@ return {
     {
         "folke/tokyonight.nvim",
         lazy = false,
-        priority = 1000,
+        priority = 999,
         config = function()
             require("tokyonight").setup({
                 style = "night",
@@ -14,31 +14,25 @@ return {
                     floats = "dark",
                 },
             })
-            -- vim.cmd.colorscheme("tokyonight-night")
         end
     },
 
     {
-        "rose-pine/neovim",
-        name = "rose-pine",
+        "catppuccin/nvim",
+        name = "catppuccin",
+        lazy = false,
+        priority = 1000,
+        auto_integrations = true,
+
         config = function()
-            require('rose-pine').setup({
-                disable_background = false,
-                styles = {
-                    italic = false,
+            require("catppuccin").setup({
+                flavour = "mocha",
+                highlight = {
+                    enable = true,
+                    additional_vim_regex_highlighting = false
                 },
             })
-        end
-    },
-
-    { 
-        "catppuccin/nvim", 
-        name = "catppuccin",
-        priority = 1000 ,
-        config = function()
-            require("catppuccin").setup({})
-        vim.cmd.colorscheme("catppuccin")
         end,
-    },
-
+    }
+   
 }

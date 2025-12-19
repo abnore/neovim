@@ -1,47 +1,38 @@
 require("abnore.config")
-require("abnore.lazy_init")
+
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+    vim.fn.system({
+        "git",
+        "clone",
+        "--filter=blob:none",
+        "https://github.com/folke/lazy.nvim.git",
+        "--branch=stable", -- latest stable release
+        lazypath,
+    })
+end
+vim.opt.rtp:prepend(lazypath)
+
+require("lazy").setup("abnore.lazy", {
+    change_detection = { notify = false }
+})
 
 local augroup = vim.api.nvim_create_augroup
 local autocmd = vim.api.nvim_create_autocmd
-
-local abnoreGroup = augroup("abnore", {})
-
--- Ensure Tree-sitter starts on a filetype
-autocmd("FileType", {
-    group = abnoreGroup,
-    pattern = {"c", "cpp", "python", "cs", "go", "bash", "zsh",
-                "markdown", "markdown_inline", "lua", "rust",
-                "javascript", "vimdoc"},
-    callback = function(args)
-        if not vim.treesitter.highlighter.active[args.buf] then
-            vim.treesitter.start(args.buf)
-        end
-    end,
-})
-
--- Filetype-based colorscheme
---autocmd("FileType", {
---    group = abnoreGroup,
---    callback = function()
---        if vim.bo.filetype == "c" or vim.bo.filetype == "cpp" then
---            pcall(vim.cmd.colorscheme, "tokyonight-night")
---        else
---            pcall(vim.cmd.colorscheme, "rose-pine-moon")
---        end
---    end,
---})
-
--- Highlight on yank
+   
+-- Highlight on yank, borrowed from ThePrimeageanaea
 autocmd("TextYankPost", {
-    group = abnoreGroup,
+    group = augroup("abnore", {}),
     callback = function()
-        vim.highlight.on_yank({
-            higroup = "IncSearch",
-            timeout = 40,
-        })
+        vim.highlight.on_yank({})
     end,
 })
--- netrw tweaks
-vim.g.netrw_browse_split = 0
-vim.g.netrw_banner = 0
-vim.g.netrw_winsize = 25
+
+vim.filetype.add {
+  extension = {
+    h = "c",
+    scheme = "scheme",
+  },
+}
+-- Manually set global colorscheme
+vim.cmd.colorscheme("catppuccin")

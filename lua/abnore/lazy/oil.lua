@@ -18,14 +18,15 @@ return
                 "size",
                 -- "mtime",
             },
-
+            skip_confirm_for_simple_edits = true, -- No point on simple edit
+            prompt_save_on_select_new_entry = false,
             float = {
                 padding = 2,
-                max_width = 0.7,
+                max_width = 0.8,
                 max_height = 0.9,
-                border = "rounded",
+                border = "double",
                 win_options = {
-                    winblend = 0,
+                    winblend = 10,
                 },
                 preview_split = "below",
             },

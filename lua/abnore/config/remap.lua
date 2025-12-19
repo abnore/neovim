@@ -9,9 +9,12 @@ vim.keymap.set("i", "Ø", "[")
 vim.keymap.set("i", "æ", "}")
 vim.keymap.set("i", "Æ", "]")
 
+-- Insert-mode escape
+vim.keymap.set("i", "<C-c>", "<Esc>")
+
 -- Saving and exiting
-vim.keymap.set( "n", "<leader>w", vim.cmd.w)
-vim.keymap.set( "n", "<leader>q", vim.cmd.x)
+vim.keymap.set( "n", "<leader>w", vim.cmd.w, { desc = "Save file"})
+vim.keymap.set( "n", "<leader>q", vim.cmd.q, { desc = "Quit nvim"})
 
 -- File / navigation
 vim.keymap.set("n", "-", "<CMD>Oil --float<CR>", { desc = "Open parent directory" })
@@ -29,30 +32,31 @@ vim.keymap.set("n", "<C-u>", "<C-u>zz")
 vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
 
--- Paste without overwriting register
-vim.keymap.set("x", "<leader>p", [["_dP]])
+-- Paste in visual mode, overwrite without overwriting register
+vim.keymap.set("v", "<leader>p", [["_dP]])
 
--- Yank to system clipboard
+-- Yank to system clipboard and paste from system clipboard
 vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])
-vim.keymap.set("n", "<leader>Y", [["+Y]])
+vim.keymap.set("n", "<leader>p", [["+p]])
 
 -- Delete without yanking
-vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]])
-
--- Insert-mode escape
-vim.keymap.set("i", "<C-c>", "<Esc>")
-
--- Disable Ex mode
-vim.keymap.set("n", "Q", "<nop>")
-
--- Tmux sessionizer
-vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
-vim.keymap.set("n", "<M-h>", "<cmd>silent !tmux-sessionizer -s 0 --vsplit<CR>")
-vim.keymap.set("n", "<M-H>", "<cmd>silent !tmux neww tmux-sessionizer -s 0<CR>")
+vim.keymap.set({ "n", "v" }, "d", [["_d]])
+vim.keymap.set("n", "dd", [["_dd]])
 
 -- Quickfix & location list navigation
 vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz")
 vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
+
+-- Better indenting in visual mode
+vim.keymap.set("v", "<", "<gv", { desc = "Indent left and reselect"})
+vim.keymap.set("v", ">", ">gv", { desc = "Indent right and reselect"})
+
+-- Disable Ex mode
+vim.keymap.set("n", "Q", "<nop>")
+
+-- Insert brackets and paranthesis and move inside them
+vim.keymap.set("i", "<C-b>", "{}<Left><CR><ESC>O", { silent = true })
+vim.keymap.set("i", "<C-k>", "()<Left>", { silent = true })
 
 -- Search & replace word under cursor
 vim.keymap.set(
@@ -70,3 +74,38 @@ end, { desc = "Toggle list / trailing whitespace" })
 vim.keymap.set("n", "<leader>ca", function()
   require("cellular-automaton").start_animation("make_it_rain")
 end)
+
+
+-- ================
+-- Telescope mappings
+vim.keymap.set("n", "<leader><leader>", function()
+  require("telescope.builtin").find_files({
+    hidden = true,
+    no_ignore = true,
+  })
+end, { desc = "Find files" })
+
+vim.keymap.set("n", "<leader>gf", function()
+  require("telescope.builtin").git_files()
+end, { desc = "Git files" })
+
+vim.keymap.set("n", "<leader>gs", function()
+  local ok, query = pcall(vim.fn.input, "Grep > ")
+  if not ok or query == "" then
+    return
+  end
+  require("telescope.builtin").grep_string({
+    search = query,
+  })
+end, { desc = "Grep prompt" })
+
+vim.keymap.set("n", "<leader>ht", function()
+  require("telescope.builtin").help_tags()
+end, { desc = "Help tags" })
+
+
+-- ================
+-- Present mappings
+vim.keymap.set("n", "<leader>pp", function()
+  require("present").start_presentation()
+end, { desc = "Start presentation" })

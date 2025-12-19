@@ -4,23 +4,20 @@ return {
         lazy = false,
         build = ":TSUpdate",
         config = function()
-            require("nvim-treesitter.config").setup({
-                ensure_installed = {
-                    "vimdoc",
-                    "javascript",
-                    "typescript",
-                    "c",
-                    "cpp",
-                    "lua",
-                    "rust",
-                    "jsdoc",
-                    "bash",
-                    "go",
-                    "python"
-                },
-                auto_install = true,
-                indent = { enable = true },
-                highlight = { enable = true, },
+            require("nvim-treesitter").install({
+                "vimdoc", "javascript", "typescript", "c", "cpp",
+                "lua", "rust", "jsdoc", "bash", "go", "python", "make"
+            }):wait(3000)
+
+            -- Explicit per-buffer activation (REQUIRED in modern Neovim)
+            local group = vim.api.nvim_create_augroup("TreesitterAttach", {})
+
+            vim.api.nvim_create_autocmd("FileType", {
+                group = group,
+                callback = function(args)
+                    -- Highlighting & injections (Neovim)
+                   pcall(vim.treesitter.start, args.buf)
+                end,
             })
         end,
     },
