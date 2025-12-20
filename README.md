@@ -8,7 +8,7 @@ Focused on core editing and navigation
 ## Overview
 
 This setup replaces an older Vimscript configuration with a modular Lua layout.
-Only plugins that were actively used are included, and i will build a simpler
+Only plugins that were actively used are included, and I will build a simpler
 design starting with this base.
 
 ---
@@ -21,20 +21,22 @@ design starting with this base.
 ├── lazy-lock.json
 └── lua/abnore
     ├── init.lua
-    ├── lazy_init.lua
     ├── config
     │   ├── init.lua
     │   ├── set.lua
     │   └── remap.lua
     └── lazy
         ├── airline.lua
-        ├── colors.lua
-        ├── oil.lua
-        ├── telescope.lua
+        ├── mini-starter.lua
+        ├── present.lua
         ├── treesitter.lua
-        ├── plenary.lua
         ├── cellular_automaton.lua
-        └── vim-tmux-navigator.lua
+        ├── oil.lua
+        ├── render-markdown.lua
+        ├── vim-tmux-navigator.lua
+        ├── colors.lua
+        ├── plenary.lua
+        └── telescope.lua
 ```
 
 ---
@@ -58,6 +60,9 @@ design starting with this base.
 - `vim-airline`
 - `vim-airline-themes`
 - `nvim-web-devicons`
+- `mini.starter`
+- `present.nvim`
+- `render-markdown.nvim`
 
 ### Funny
 - `cellular-automaton.nvim`
@@ -66,8 +71,13 @@ design starting with this base.
 
 ## Tree-sitter
 
-Tree sitter will no longer auto install languages.
-first install the cli tool to get the parsers
+Tree-sitter will **no longer** auto install languages.
+first install the cli tool to get the parsers.
+
+>[!NOTE]
+> The Tree-sitter API changed in a recent update:
+> `configs` was renamed to `config`. This is a breaking change and requires
+> manual adjustment.
 
 ```sh
 brew install tree-sitter-cli
@@ -92,14 +102,13 @@ Languages configured:
 ## Keybindings (Selected)
 
 ### General
-- `<leader>e` — open Oil
-- `<leader>bd` — delete buffer
+- `-` — open Oil
 
 ### Telescope
 - `<leader><leader>` — find files
-- `<C-p>` — git files
-- `<leader>ps` — grep prompt
-- `<leader>pws` — grep word under cursor
+- `<leader>cwd` — find files in cwd
+- `<leader>gf` — git files
+- `<leader>gs` — grep prompt
 
 ### Editing
 - `J` / `K` (visual) — move selected lines
@@ -110,6 +119,8 @@ Languages configured:
 
 ### tmux
 - `<C-h/j/k/l>` — move between tmux and Neovim panes
+
+Custom configured theme
 
 ---
 
