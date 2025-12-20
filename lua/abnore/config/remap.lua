@@ -79,11 +79,16 @@ end)
 -- ================
 -- Telescope mappings
 vim.keymap.set("n", "<leader><leader>", function()
+  require("telescope.builtin").find_files()
+end, { desc = "Find files" })
+
+vim.keymap.set("n", "<leader>cwd", function()
   require("telescope.builtin").find_files({
+    cwd = require("telescope.utils").buffer_dir(),
     hidden = true,
     no_ignore = true,
   })
-end, { desc = "Find files" })
+end, { desc = "Find files cwd" })
 
 vim.keymap.set("n", "<leader>gf", function()
   require("telescope.builtin").git_files()
@@ -109,3 +114,20 @@ end, { desc = "Help tags" })
 vim.keymap.set("n", "<leader>pp", function()
   require("present").start_presentation()
 end, { desc = "Start presentation" })
+
+
+-- ================
+-- Markdown mappings
+vim.keymap.set("n", "<leader>mk", function()
+    if vim.bo.filetype ~= "markdown" then
+        return
+    end
+
+    require("render-markdown").buf_toggle()
+
+    if vim.o.signcolumn == "yes:1" then
+        vim.o.signcolumn = "auto"
+    else
+        vim.o.signcolumn = "yes:1"
+    end
+end, { desc = "Toggle markdown" })

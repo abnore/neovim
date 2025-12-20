@@ -1,7 +1,6 @@
 return {
     {
         "folke/tokyonight.nvim",
-        lazy = false,
         priority = 999,
         config = function()
             require("tokyonight").setup({
@@ -20,7 +19,7 @@ return {
     {
         "catppuccin/nvim",
         name = "catppuccin",
-        lazy = false,
+        lazy = false, -- Main Colorscheme cant be lazy loaded
         priority = 1000,
         auto_integrations = true,
 

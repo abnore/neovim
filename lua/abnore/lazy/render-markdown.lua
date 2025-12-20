@@ -6,4 +6,10 @@ return {
     ---@module 'render-markdown'
     ---@type render.md.UserConfig
     opts = {},
+    config = function()
+        require('render-markdown').setup({
+            -- Whether markdown should be rendered by default.
+            enabled = false,
+        })
+    end
 }
