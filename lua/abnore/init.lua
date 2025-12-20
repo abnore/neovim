@@ -28,11 +28,6 @@ autocmd("TextYankPost", {
     end,
 })
 
-vim.filetype.add {
-  extension = {
-    h = "c",
-    scheme = "scheme",
-  },
-}
 -- Manually set global colorscheme
 vim.cmd.colorscheme("catppuccin")
+

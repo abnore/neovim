@@ -1,4 +1,5 @@
 vim.opt.guicursor = "n-v-c:block,i:ver25,r-cr-o:block"
+
 -- Using Oil, so diabling netrw
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
@@ -39,4 +40,8 @@ vim.opt.listchars = {
   extends = "»",
   precedes = "«",
 }
-
+vim.filetype.add {
+  extension = {
+    h = "c",
+  },
+}
