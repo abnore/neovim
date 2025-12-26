@@ -28,6 +28,4 @@ autocmd("TextYankPost", {
     end,
 })
 
--- Manually set global colorscheme
-vim.cmd.colorscheme("catppuccin")
-
+vim.cmd.colorscheme("kanagawa")

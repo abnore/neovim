@@ -7,7 +7,7 @@ return {
   lazy = false,
   config = function()
     vim.g.airline_powerline_fonts = 1
-    vim.g.airline_theme = "angr" --"catppuccin"  -- or angr - minimalist
+    vim.g.airline_theme = "angr"  -- or angr - minimalist
     vim.g.airline_left_sep = ""
     vim.g.airline_right_sep = ""
     vim.g.airline_section_c = "%<%f"

@@ -9,6 +9,9 @@ return {
     config = function()
         require('telescope').setup {
             pickers = {
+                colorscheme = {
+                    enable_preview = true,
+                },
              find_files = {
                  theme = "ivy",
              },
