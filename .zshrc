@@ -1,0 +1,100 @@
+# typeset declares attributes on variables. -U -> unique elements only
+typeset -U PATH
+
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+export CLICOLOR=1
+export LSCOLORS=ExGxBxDxCxEgEdxbxgxcxd
+
+# Load custom aliases
+if [ -f ~/.zsh_aliases ]; then
+    source ~/.zsh_aliases
+fi
+
+# Load plugins
+if [ -f "/opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh" ]; then
+    source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+fi
+
+if [ -f "/opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]; then
+    source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+fi
+
+if [ -f "/opt/homebrew/share/powerlevel10k/powerlevel10k.zsh-theme" ]; then
+    source /opt/homebrew/share/powerlevel10k/powerlevel10k.zsh-theme
+fi
+
+# ---- Homebrew: keep output clean, keep system tidy
+export HOMEBREW_NO_ENV_HINTS=1
+
+# Setting the default pager for man pages
+export MANPAGER="less -R --use-color \
+  -Dd+203 \
+  -Du+75  \
+  -DS+203 \
+  -DP+110 \
+  -DE+203 \
+  -DN+173"
+
+autoload -Uz compinit && compinit -C
+zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}'
+
+# This lets you use the arrow keys and navigate prev commands filtered on what
+# is already typed ^[[A is up, and ^[[B is down
+bindkey "^[[A" history-search-backward
+bindkey "^[[B" history-search-forward
+
+autoload -Uz edit-command-line
+zle -N edit-command-line
+bindkey '^X^E' edit-command-line
+
+commas() {
+    local num="$1"
+    local result=""
+    local sign=""
+
+    # Handle negative numbers
+    if [[ $num == -* ]]; then
+        sign="-"
+        num="${num#-}"
+    fi
+
+    while [[ ${#num} -gt 3 ]]; do
+        result=",$(printf '%s' "${num: -3}")$result"
+        num="${num:0:${#num}-3}"
+    done
+
+    printf "%s%s%s\n" "$sign" "$num" "$result"
+}
+
+seconds() {
+    local T=$1
+    local D=$((T/86400))
+    local H=$((T/3600%24))
+    local M=$((T/60%60))
+    local S=$((T%60))
+
+    (( D > 0 )) && printf '%d days ' "$D"
+    (( H > 0 )) && printf '%d hours ' "$H"
+    (( M > 0 )) && printf '%d minutes ' "$M"
+    (( D > 0 || H > 0 || M > 0 )) && printf 'and '
+    printf '%d seconds\n' "$S"
+}
+
+#############
+
+# Homebrew
+export PATH="/opt/homebrew/bin:/opt/homebrew/sbin:$PATH"
+
+# User-installed tools
+export PATH="$HOME/.local/bin:$PATH"
+
+# Go tools installed via `go install`
+export PATH="$HOME/go/bin:$PATH"
