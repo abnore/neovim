@@ -1,0 +1,64 @@
+# macOS files
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon?
+._*
+
+# macOS system files
+.Spotlight-V100
+.Trashes
+
+# Python cache / compiled files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Python virtual environments (user-specific)
+.env
+.venv
+venv/
+
+# Editors
+# VSCode
+.vscode/
+
+# PyCharm / IntelliJ
+.idea/
+
+# Neovim swap files
+*.swp
+*.swo
+
+# Vim backups
+*~
+*.bak
+
+# Logs
+*.log
+
+# C / C++ build artifacts (user local)
+*.o
+*.obj
+*.so
+*.dylib
+*.dll
+*.exe
+
+# CMake/GCC/Clang stuff that is local
+*.out
+
+# Rust / Cargo local crap
+*.rlib
+
+# Temporary files
+*.tmp
+*.temp
+
+# Node / JS (if you ever use it)
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# mac Finder metadata you really don’t want
+.fseventsd

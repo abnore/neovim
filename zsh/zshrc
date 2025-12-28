@@ -95,6 +95,3 @@ export PATH="/opt/homebrew/bin:/opt/homebrew/sbin:$PATH"
 
 # User-installed tools
 export PATH="$HOME/.local/bin:$PATH"
-
-# Go tools installed via `go install`
-export PATH="$HOME/go/bin:$PATH"
