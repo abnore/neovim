@@ -1,0 +1,16 @@
+# --- Output & UX ---
+--line-number
+--column
+--heading
+--smart-case
+
+# --- Color (works everywhere, unlike grep) ---
+--color=always
+
+# --- Performance & sanity ---
+--max-columns=200
+--max-columns-preview
+
+# --- File handling ---
+--hidden
+--glob=!.git/*
