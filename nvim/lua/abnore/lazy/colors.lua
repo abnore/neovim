@@ -1,6 +1,7 @@
 return {
     {
-        "folke/tokyonight.nvim", opts = {
+        "folke/tokyonight.nvim", 
+        opts = {
             style = "night",
             terminal_colors = true,
             styles = {
@@ -13,7 +14,8 @@ return {
     },
 
     {
-        "rebelot/kanagawa.nvim", opts = { compile = true },
+        "rebelot/kanagawa.nvim", 
+        opts = { compile = true },
         build = ":KanagawaCompile",
     },
 }

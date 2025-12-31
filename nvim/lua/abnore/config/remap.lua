@@ -94,22 +94,22 @@ end, { desc = "Pick buffers" })
 -- ================
 -- Present mappings
 vim.keymap.set("n", "<leader>pp", function()
-  require("present").start_presentation()
+    if vim.bo.filetype == "markdown" then
+        require("present").start_presentation()
+    end
 end, { desc = "Start presentation" })
 
 
 -- ================
 -- Markdown mappings
 vim.keymap.set("n", "<leader>mk", function()
-    if vim.bo.filetype ~= "markdown" then
-        return
-    end
+    if vim.bo.filetype == "markdown" then
+        require("render-markdown").toggle()
 
-    require("render-markdown").buf_toggle()
-
-    if vim.o.signcolumn == "yes:1" then
-        vim.o.signcolumn = "auto"
-    else
-        vim.o.signcolumn = "yes:1"
+        if vim.o.signcolumn == "yes:1" then
+            vim.o.signcolumn = "auto"
+        else
+            vim.o.signcolumn = "yes:1"
+        end
     end
 end, { desc = "Toggle markdown" })
