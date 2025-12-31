@@ -3,14 +3,17 @@
 --column
 --heading
 --smart-case
+--context=1
+# --- Color---
+--colors=line:none
+--colors=line:style:bold
 
-# --- Color (works everywhere, unlike grep) ---
---color=always
-
-# --- Performance & sanity ---
---max-columns=200
+# Don't let ripgrep vomit really long lines to my terminal, and show a preview.
+--max-columns=60
 --max-columns-preview
 
 # --- File handling ---
 --hidden
---glob=!.git/*
+--no-ignore
+--glob=!**/.git/**
+--glob=!**/.DS_Store

@@ -11,13 +11,15 @@ vim.keymap.set("i", "Æ", "]")
 
 -- Insert-mode escape
 vim.keymap.set("i", "<C-c>", "<Esc>")
+-- Remove highlighting
+vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 
 -- Saving and exiting
 vim.keymap.set( "n", "<leader>w", vim.cmd.w, { desc = "Save file"})
 vim.keymap.set( "n", "<leader>q", vim.cmd.q, { desc = "Quit nvim"})
 
 -- File / navigation
-vim.keymap.set("n", "-", "<CMD>Oil --float<CR>", { desc = "Open parent directory" })
+vim.keymap.set("n", "-", "<cmd>Oil --float<CR>", { desc = "Open parent directory" })
 
 -- Move selected lines
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv", { silent = true })
@@ -76,37 +78,18 @@ end)
 
 
 -- ================
--- Telescope mappings
+-- Pick Mapping
 vim.keymap.set("n", "<leader><leader>", function()
-  require("telescope.builtin").find_files()
-end, { desc = "Find files" })
-
-vim.keymap.set("n", "<leader>cwd", function()
-  require("telescope.builtin").find_files({
-    cwd = require("telescope.utils").buffer_dir(),
-    hidden = true,
-    no_ignore = true,
-  })
-end, { desc = "Find files cwd" })
+  MiniPick.builtin.files()
+end, { desc = "Pick files (all)" })
 
 vim.keymap.set("n", "<leader>gf", function()
-  require("telescope.builtin").git_files()
-end, { desc = "Git files" })
+  MiniPick.builtin.files({ tool = "git" })
+end, { desc = "Pick git files" })
 
-vim.keymap.set("n", "<leader>gs", function()
-  local ok, query = pcall(vim.fn.input, "Grep > ")
-  if not ok or query == "" then
-    return
-  end
-  require("telescope.builtin").grep_string({
-    search = query,
-  })
-end, { desc = "Grep prompt" })
-
-vim.keymap.set("n", "<leader>ht", function()
-  require("telescope.builtin").help_tags()
-end, { desc = "Help tags" })
-
+vim.keymap.set("n", "<leader>b", function()
+  MiniPick.builtin.buffers()
+end, { desc = "Pick buffers" })
 
 -- ================
 -- Present mappings

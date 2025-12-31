@@ -72,11 +72,10 @@ return {
             end,
         })
      
-        local mocha = require("catppuccin.palettes").get_palette "mocha"
         vim.api.nvim_create_autocmd("ColorScheme", {
             callback = function()
                 vim.api.nvim_set_hl(0, "MiniStarterHeader", {
-                    fg = mocha.red,
+                    fg = "#ff5f5f", -- desert red
                     bold = false,
                 })
             end,
