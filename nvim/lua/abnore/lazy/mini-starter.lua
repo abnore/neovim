@@ -6,11 +6,11 @@ return {
         starter.setup({
             evaluate_single = true,
             header = [[
-            _|      _|  _|      _|  _|_|_|  _|      _|  
-            _|_|    _|  _|      _|    _|    _|_|  _|_|  
-            _|  _|  _|  _|      _|    _|    _|  _|  _|  
-            _|    _|_|    _|  _|      _|    _|      _|  
-            _|      _|      _|      _|_|_|  _|      _|  
+            _|      _|  _|      _|  _|_|_|  _|      _|
+            _|_|    _|  _|      _|    _|    _|_|  _|_|
+            _|  _|  _|  _|      _|    _|    _|  _|  _|
+            _|    _|_|    _|  _|      _|    _|      _|
+            _|      _|      _|      _|_|_|  _|      _|
             ]],
 
             items = {
@@ -22,16 +22,20 @@ return {
                 starter.sections.recent_files(3, true),
 
 
-                -- Telescope (explicit, clean)
+                -- Pick (explicit, clean)
                 {
-                    name = "Find files",
-                    action = "Telescope find_files",
-                    section = "Search",
+                    name = "Files",
+                    action = function()
+                        require("mini.pick").builtin.files()
+                    end,
+                    section = "Pick",
                 },
                 {
-                    name = "Find text",
-                    action = "Telescope live_grep",
-                    section = "Search",
+                    name = "Text",
+                    action = function()
+                        require("mini.pick").builtin.grep_live()
+                    end,
+                    section = "Pick",
                 },
                 -- Project / Neovim
                 {
@@ -48,17 +52,12 @@ return {
                     end,
                     section = "Dotfiles",
                 },
-                {
-                    name = "TODO",
-                    action = "Telescope grep_string search=TODO",
-                    section = "Tasks",
-                },
             },
 
             content_hooks = {
                 starter.gen_hook.adding_bullet("░ "),
                 starter.gen_hook.indexing("section",
-                            { "Builtin actions", "Search", "Dotfiles", "Tasks" }),
+                            { "Builtin actions", "Pick", "Dotfiles" }),
                 starter.gen_hook.aligning("center", "center"),
                 starter.gen_hook.padding(0, 2),
             },
@@ -71,7 +70,7 @@ return {
                 return ""
             end,
         })
-     
+
         vim.api.nvim_create_autocmd("ColorScheme", {
             callback = function()
                 vim.api.nvim_set_hl(0, "MiniStarterHeader", {
