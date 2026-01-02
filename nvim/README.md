@@ -24,19 +24,20 @@ design starting with this base.
     ├── config
     │   ├── init.lua
     │   ├── set.lua
+    │   ├── autocmd.lua
+    │   ├── lazy.lua
     │   └── remap.lua
     └── lazy
         ├── airline.lua
         ├── mini-starter.lua
+        ├── mini-pick.lua
         ├── present.lua
         ├── treesitter.lua
         ├── cellular_automaton.lua
         ├── oil.lua
         ├── render-markdown.lua
         ├── vim-tmux-navigator.lua
-        ├── colors.lua
-        ├── plenary.lua
-        └── telescope.lua
+        └── colors.lua
 ```
 
 ---
@@ -45,10 +46,9 @@ design starting with this base.
 
 ### Core
 - `lazy.nvim`
-- `plenary.nvim`
 
 ### Navigation
-- `telescope.nvim`
+- `mini-pick`
 - `oil.nvim`
 - `vim-tmux-navigator`
 
@@ -104,11 +104,10 @@ Languages configured:
 ### General
 - `-` — open Oil
 
-### Telescope
+### Pick
 - `<leader><leader>` — find files
-- `<leader>cwd` — find files in cwd
 - `<leader>gf` — git files
-- `<leader>gs` — grep prompt
+- `<leader>b` — buffers
 
 ### Editing
 - `J` / `K` (visual) — move selected lines
