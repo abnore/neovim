@@ -57,7 +57,6 @@ vim.keymap.set("n", "Q", "<nop>")
 
 -- Insert brackets and paranthesis and move inside them
 vim.keymap.set("i", "<C-b>", "{}<Left><CR><ESC>O", { silent = true })
-vim.keymap.set("i", "<C-k>", "()<Left>", { silent = true })
 
 -- Search & replace word under cursor
 vim.keymap.set(
@@ -90,26 +89,3 @@ end, { desc = "Pick git files" })
 vim.keymap.set("n", "<leader>b", function()
   MiniPick.builtin.buffers()
 end, { desc = "Pick buffers" })
-
--- ================
--- Present mappings
-vim.keymap.set("n", "<leader>pp", function()
-    if vim.bo.filetype == "markdown" then
-        require("present").start_presentation()
-    end
-end, { desc = "Start presentation" })
-
-
--- ================
--- Markdown mappings
-vim.keymap.set("n", "<leader>mk", function()
-    if vim.bo.filetype == "markdown" then
-        require("render-markdown").toggle()
-
-        if vim.o.signcolumn == "yes:1" then
-            vim.o.signcolumn = "auto"
-        else
-            vim.o.signcolumn = "yes:1"
-        end
-    end
-end, { desc = "Toggle markdown" })

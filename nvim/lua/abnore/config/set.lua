@@ -2,6 +2,7 @@
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
+vim.opt.confirm = true
 vim.opt.guicursor = "n-v-c:block,i:ver25,r-cr-o:block"
 vim.opt.termguicolors = true
 vim.opt.isfname:append("@-@")
@@ -13,13 +14,14 @@ vim.opt.showmode = false
 vim.opt.ruler = false
 vim.opt.number = true
 vim.opt.relativenumber = true
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
 
-vim.opt.formatoptions:remove("o")
 vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
-vim.opt.wrap = false
+vim.opt.wrap = true
 vim.opt.scrolloff = 8
 vim.opt.colorcolumn = { 85 }
 

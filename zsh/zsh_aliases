@@ -8,6 +8,7 @@ alias downloads="cd ~/Downloads"
 alias srcsh="source ~/.zshrc"
 alias edit="nvim ~/.zshrc"
 alias aliases="nvim ~/.zsh_aliases"
+alias vim=nvim
 
 alias ll="ls -Aohp"
 alias cat='bat -p'

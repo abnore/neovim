@@ -31,11 +31,9 @@ design starting with this base.
         ├── airline.lua
         ├── mini-starter.lua
         ├── mini-pick.lua
-        ├── present.lua
         ├── treesitter.lua
         ├── cellular_automaton.lua
         ├── oil.lua
-        ├── render-markdown.lua
         ├── vim-tmux-navigator.lua
         └── colors.lua
 ```
@@ -61,8 +59,6 @@ design starting with this base.
 - `vim-airline-themes`
 - `nvim-web-devicons`
 - `mini.starter`
-- `present.nvim`
-- `render-markdown.nvim`
 
 ### Funny
 - `cellular-automaton.nvim`

@@ -1,0 +1,180 @@
+---
+default:
+  margin:
+    percent: 8
+  colors:
+    foreground: palette:fujiWhite
+    background: palette:sumiInk3   # ← correct Wave background
+
+slide_title:
+  alignment: center
+  padding_bottom: 1
+  padding_top: 1
+  colors:
+    foreground: palette:autumnYellow
+  bold: true
+  font_size: 2
+
+code:
+  alignment: center
+  minimum_size: 50
+  minimum_margin:
+    percent: 8
+  theme_name: OneHalfDark
+  padding:
+    horizontal: 2
+    vertical: 1
+
+execution_output:
+  colors:
+    foreground: palette:fujiWhite
+    background: palette:sumiInk4   # ← panel background
+  status:
+    running:
+      foreground: palette:crystalBlue
+    success:
+      foreground: palette:springGreen
+    failure:
+      foreground: palette:autumnRed
+    not_started:
+      foreground: palette:autumnYellow
+  padding:
+    horizontal: 2
+    vertical: 1
+
+inline_code:
+  colors:
+    foreground: palette:springGreen
+    background: palette:sumiInk4   # softer than blue
+
+intro_slide:
+  title:
+    alignment: center
+    colors:
+      foreground: palette:crystalBlue
+    font_size: 2
+  subtitle:
+    alignment: center
+    colors:
+      foreground: palette:oldWhite
+  event:
+    alignment: center
+    colors:
+      foreground: palette:crystalBlue
+  location:
+    alignment: center
+    colors:
+      foreground: palette:oldWhite
+  date:
+    alignment: center
+    colors:
+      foreground: palette:autumnYellow
+  author:
+    alignment: center
+    colors:
+      foreground: palette:springGreen
+    positioning: page_bottom
+  footer: false
+
+headings:
+  h1:
+    prefix: "██"
+    colors:
+      foreground: palette:springGreen
+  h2:
+    prefix: "▓▓▓"
+    colors:
+      foreground: palette:autumnRed
+  h3:
+    prefix: "▒▒▒▒"
+    colors:
+      foreground: palette:crystalBlue
+  h4:
+    prefix: "░░░░░"
+    colors:
+      foreground: palette:oniViolet
+  h5:
+    prefix: "░░░░░░"
+    colors:
+      foreground: palette:oniViolet
+  h6:
+    prefix: "░░░░░░░"
+    colors:
+      foreground: palette:oniViolet
+
+block_quote:
+  prefix: "▍ "
+  colors:
+    foreground: palette:fujiWhite
+    background: palette:waveBlue1
+    prefix: palette:autumnYellow
+
+alert:
+  prefix: "▍ "
+  base_colors:
+    foreground: palette:fujiWhite
+    background: palette:waveBlue1
+  styles:
+    note:
+      color: palette:crystalBlue
+      icon: "󰋼"
+    tip:
+      color: palette:springGreen
+      icon: "󰌶"
+    important:
+      color: palette:oniViolet
+      icon: "󰅾"
+    warning:
+      color: palette:autumnYellow
+      icon: "󰀪"
+    caution:
+      color: palette:autumnRed
+      icon: "󰳦"
+
+
+typst:
+  colors:
+    foreground: palette:fujiWhite
+    background: palette:waveBlue1
+
+footer:
+  style: template
+  right: "{current_slide} / {total_slides}"
+
+modals:
+  selection_colors:
+    foreground: palette:autumnYellow
+
+mermaid:
+  background: transparent
+  theme: dark
+
+d2:
+  theme: 200
+
+palette:
+  colors:
+    sumiInk0: "16161d"
+    sumiInk1: "181820"
+    sumiInk2: "1a1a22"
+    sumiInk3: "1f1f28"   # main bg
+    sumiInk4: "2a2a37"   # panels
+    sumiInk5: "363646"
+    sumiInk6: "54546d"
+
+    waveBlue1: "223249"
+    waveBlue2: "2d4f67"
+
+    fujiWhite: "dcd7ba"
+    oldWhite: "c8c093"
+    fujiGray: "727169"
+
+    autumnGreen: "76946a"
+    autumnRed: "c34043"
+    autumnYellow: "dca561"
+    carpYellow: "e6c384"
+
+    crystalBlue: "7e9cd8"
+    springGreen: "98bb6c"
+    oniViolet: "957fb8"
+    sakuraPink: "d27e99"

@@ -90,6 +90,21 @@ seconds() {
     printf '%d seconds\n' "$S"
 }
 
+degrees() {
+    local value=$1
+    local celsius=0
+
+    [[ "$2" == "-c" ]] && celsius=1
+
+    if (( celsius )); then
+        local F=$(( value * 1.8 + 32 ))
+        printf '%.1f°C is %.1f°F\n' "$value" "$F"
+    else
+        local C=$(( (value - 32) / 1.8 ))
+        printf '%.1f°F is %.1f°C\n' "$value" "$C"
+    fi
+}
+
 #############
 
 # Homebrew
@@ -97,3 +112,4 @@ export PATH="/opt/homebrew/bin:/opt/homebrew/sbin:$PATH"
 
 # User-installed tools
 export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/.cargo/bin:$PATH"
