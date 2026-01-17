@@ -1,23 +1,28 @@
-alias ..="cd .."
-alias ...="cd ../.."
-alias ....="cd ../../.."
-alias uio="cd ~/Documents/UIO/02_master/8_semester"
-alias movies="cd ~/Movies"
-alias downloads="cd ~/Downloads"
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias uio='cd ~/Documents/UIO/02_master/8_semester'
+alias movies='cd ~/Movies'
+alias downloads='cd ~/Downloads'
+alias c='clear'
 
-alias srcsh="source ~/.zshrc"
-alias edit="nvim ~/.zshrc"
-alias aliases="nvim ~/.zsh_aliases"
+alias srcsh='source ~/.zshrc'
+alias edit='nvim ~/.zshrc'
+alias aliases='nvim ~/.zsh_aliases'
 alias vim=nvim
 
-alias ll="ls -Aohp"
+alias ll='ls -Aohp'
 alias cat='bat -p'
 alias please='sudo $(fc -ln -1)'
 
-alias weather="curl wttr.in"
+alias weather='curl wttr.in'
+alias ghidra='/opt/homebrew/Cellar/ghidra/12.0/libexec/ghidraRun'
 
 ############# in3000 sshfs specific.
-alias mount_in3000='sshfs ifi:in3000 ~/dev/in3000 -o reconnect,modules=iconv'
+alias mount_in3000='sshfs ifi:in3000 ~/dev/in3000 \
+-o reconnect,ServerAliveInterval=15,ServerAliveCountMax=3 \
+-o defer_permissions \
+-o ssh_command="ssh -o ControlMaster=no -o ControlPath=none -o TCPKeepAlive=no"'
 alias unmount_in3000='umount -f ~/dev/in3000'
 ####################################
 
