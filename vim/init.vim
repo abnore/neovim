@@ -1,0 +1,103 @@
+" 2026 Andreas Nore <https://github.com/abnore>
+"
+" Simple setup for vim or nvim without plugins. Works for either, just set
+" correct undodir and place in correct place
+"
+" Create a ~/.vim/vimrc or ~/.config/nvim/init.vim and paste this in.
+" Also create ~/.vim/colors/ or ~/.config/nvim/colors with either external
+" colorschemes (e.g. gruvbox, tokyonight or kanagawa)
+
+"set nocompatible "only vim
+set termguicolors
+syntax enable
+color kanagawa " You need the 'colors/' dir with kanagawa.vim for this one
+
+set number
+set relativenumber
+set backspace=indent,eol,start
+set splitbelow
+set splitright
+set scrolloff=8
+set mouse=a
+set noswapfile
+set wildmenu
+set wildmode=longest:full,full
+set completeopt=menu,menuone,noselect
+set incsearch
+set hlsearch
+set colorcolumn=80
+set lazyredraw
+set updatetime=300
+"set belloff=all "only vim
+
+set undofile        " Enable persistent undo
+set undodir=~/.config/nvim/undo " Set directory for undo files ~/.vim/undo also
+
+" Ensure filetype detection is on
+filetype on
+filetype plugin indent on
+
+" Set tab width based on file type feel free to add more
+augroup filetype_tab_settings
+  autocmd!
+  autocmd FileType python,c,cpp,asm setlocal tabstop=4 shiftwidth=4 expandtab
+  autocmd FileType vhdl,vhd setlocal tabstop=2 shiftwidth=2 expandtab
+augroup END
+
+" This makes gf work on all headers, not just local ones (on linux)
+augroup c_system_includes
+  autocmd!
+  autocmd FileType c,cpp setlocal path+=/usr/include,/usr/local/include,/usr/lib/gcc/x86_64-redhat-linux/11/include
+augroup END
+
+" Better key mappings
+let mapleader=" "
+nnoremap <Leader>w :w<CR>
+nnoremap <Leader>q :q<CR>
+inoremap <C-c> <Esc>
+
+nnoremap <silent> ; :nohlsearch<CR>
+nnoremap <C-d> <C-d>zz
+nnoremap <C-u> <C-u>zz
+nnoremap <silent> n nzzzv
+nnoremap <silent> N Nzzzv
+nnoremap <silent> dd "_dd
+nnoremap <silent> yy V"+y
+vnoremap <silent> <Leader>y "+y
+nnoremap <silent> <Leader>p "+p
+vnoremap <silent> <Leader>p "_dP
+
+inoremap <silent> æ }
+inoremap <silent> Æ ]
+inoremap <silent> ø {
+inoremap <silent> Ø [
+inoremap <silent> å \
+inoremap <silent> Å \|
+
+vnoremap <silent> J :m '>+1<CR>gv=gv
+vnoremap <silent> K :m '>-2<CR>gv=gv
+vnoremap <silent> < <gv
+vnoremap <silent> > >gv
+
+" netrw magic
+nnoremap <silent> <Leader><Leader> :Ex<CR>
+autocmd FileType netrw nnoremap <buffer> ? :help netrw-quickmap<CR>
+" hide netrw top message - toggle with I
+let g:netrw_banner=0
+" tree listing by default
+let g:netrw_liststyle=3
+" hide vim swap files
+let g:netrw_list_hide='.*\.swp$'
+" netrw commands
+" Enter / l   - open
+" h / -       - up
+" %           - new file
+" d           - new dir
+" D           - delete
+" R           - rename
+" v / o / t   - vertical, below split or tab
+" mf + mm     - move many files
+" i / s / gh  - view tweaks
+" q           - quit
+"ctrl+w(C-w) is prefix for windows. C-w o is only this one, C-w q closes
+"C-w hjkl moves around. gt/gT for tabs
