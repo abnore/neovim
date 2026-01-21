@@ -27,7 +27,7 @@ vim.opt.colorcolumn = { 85 }
 
 vim.opt.swapfile = false
 vim.opt.backup = false
-vim.opt.undodir = vim.fn.expand("~/.vim/undodir")
+vim.opt.undodir = vim.fn.expand("~/dev/dotfiles/nvim/undo")
 vim.opt.undofile = true
 
 vim.opt.incsearch = true

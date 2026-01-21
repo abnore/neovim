@@ -7,7 +7,7 @@
 " Also create ~/.vim/colors/ or ~/.config/nvim/colors with either external
 " colorschemes (e.g. gruvbox, tokyonight or kanagawa)
 
-"set nocompatible "only vim
+set nocompatible "only vim
 set termguicolors
 syntax enable
 color kanagawa " You need the 'colors/' dir with kanagawa.vim for this one
@@ -28,10 +28,10 @@ set hlsearch
 set colorcolumn=80
 set lazyredraw
 set updatetime=300
-"set belloff=all "only vim
+set belloff=all "only vim
 
 set undofile        " Enable persistent undo
-set undodir=~/.config/nvim/undo " Set directory for undo files ~/.vim/undo also
+set undodir=~/dev/dotfiles/vim/undo " Or for nvim undo files ~/.config/nvim/undo
 
 " Ensure filetype detection is on
 filetype on
