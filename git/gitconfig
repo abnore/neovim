@@ -1,75 +1,75 @@
 [user]
-	name = Andreas Bjørgulv Nore
-	email = andreas.nore@gmail.com
+    name = Andreas Bjørgulv Nore
+    email = andreas.nore@gmail.com
 
 [core]
-	pager = bat
-	editor = nvim
-	excludesfile = ~/.gitignore_global
+    pager = bat
+    editor = nvim
+    excludesfile = ~/.gitignore_global
 
 [help]
-	autocorrect = 1
+    autocorrect = 1
 
 [init]
-	defaultBranch = main
+    defaultBranch = main
 
 [alias]
-	co = checkout
-	b = branch
-	c = commit
-	s = status -s
-	last = log -1 HEAD
-	lg = log --graph --oneline --decorate --all
-	aa = add -A
-	cm = commit -m
-	amend = commit --amend --no-edit
-	undo = reset HEAD~1 --mixed
-	hist = log --graph --decorate --pretty=oneline --abbrev-commit --all
-	rb = rebase -i HEAD~5
-	fp = push --force-with-lease
-	fpush = push --force-with-lease
-	update = pull origin main --rebase
+    co = checkout
+    b = branch
+    c = commit
+    s = status -s
+    last = log -1 HEAD
+    lg = log --graph --oneline --decorate --all
+    aa = add -A
+    cm = commit -m
+    amend = commit --amend --no-edit
+    undo = reset HEAD~1 --mixed
+    hist = log --graph --decorate --pretty=oneline --abbrev-commit --all
+    rb = rebase -i HEAD~5
+    fp = push --force-with-lease
+    fpush = push --force-with-lease
+    update = pull origin main --rebase
 
 [color]
-	ui = auto
+    ui = auto
 
 [color "branch"]
-	current = yellow reverse
-	local = yellow
-	remote = green
+    current = yellow reverse
+    local = yellow
+    remote = green
 
 [color "diff"]
-	meta = yellow bold
-	frag = magenta bold
-	old = red bold
-	new = green bold
+    meta = yellow bold
+    frag = magenta bold
+    old = red bold
+    new = green bold
 
 [color "status"]
-	added = yellow
-	changed = green
-	untracked = cyan
+    added = yellow
+    changed = green
+    untracked = cyan
 
 [merge]
-	tool = meld
+    tool = meld
     # Or another merge tool like kdiff3, beyond compare, etc.
 
 [credential]
-	helper = osxkeychain
+    helper = osxkeychain
     # Or use `helper = ocache --timeout=3600
 
 [push]
-	default = current
+    default = current
     # This pushes the current branch to the upstream branch with the same name.
 
 [pull]
-	rebase = true
+    rebase = true
     # Makes `git pull` use rebase instead of merge by default
 
 #[format]
 #	pretty = oneline # Temporarily removes this for boot.dev
     # Customize how the log is displayed
 [filter "lfs"]
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
-	required = true
+    clean = git-lfs clean -- %f
+    smudge = git-lfs smudge -- %f
+    process = git-lfs filter-process
+    required = true

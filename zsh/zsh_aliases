@@ -5,6 +5,7 @@ alias uio='cd ~/Documents/UIO/02_master/8_semester'
 alias movies='cd ~/Movies'
 alias downloads='cd ~/Downloads'
 alias c='clear'
+alias ta='uio && cd TA'
 
 alias srcsh='source ~/.zshrc'
 alias edit='nvim ~/.zshrc'

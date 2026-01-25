@@ -2,6 +2,7 @@
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
+vim.opt.belloff = none
 vim.opt.confirm = true
 vim.opt.guicursor = "n-v-c:block,i:ver25,r-cr-o:block"
 vim.opt.termguicolors = true

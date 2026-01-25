@@ -11,6 +11,7 @@ vim.keymap.set("i", "Æ", "]")
 
 -- Insert-mode escape
 vim.keymap.set("i", "<C-c>", "<Esc>")
+
 -- Remove highlighting
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 
@@ -75,7 +76,7 @@ vim.keymap.set("n", "<leader>ca", function()
   require("cellular-automaton").start_animation("make_it_rain")
 end)
 
-
+-- Remember CTRL + 6 - maybe make a mapping later
 -- ================
 -- Pick Mapping
 vim.keymap.set("n", "<leader><leader>", function()
