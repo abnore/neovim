@@ -10,7 +10,10 @@
 set nocompatible "only vim
 set termguicolors
 syntax enable
-color kanagawa " You need the 'colors/' dir with kanagawa.vim for this one
+" You need the 'colors/' dir with kanagawa.vim for this one and a terminal
+" with proper truecolor (24-bit RGB) support. Older macOS Terminal versions
+" render truecolor poorly; iTerm2 works reliably.
+color kanagawa
 
 set number
 set relativenumber
@@ -75,7 +78,7 @@ inoremap <silent> å \
 inoremap <silent> Å \|
 
 vnoremap <silent> J :m '>+1<CR>gv=gv
-vnoremap <silent> K :m '>-2<CR>gv=gv
+vnoremap <silent> K :m '<-2<CR>gv=gv
 vnoremap <silent> < <gv
 vnoremap <silent> > >gv
 

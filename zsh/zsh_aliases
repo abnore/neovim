@@ -18,6 +18,14 @@ alias please='sudo $(fc -ln -1)'
 alias weather='curl wttr.in'
 alias ghidra='/opt/homebrew/Cellar/ghidra/12.0/libexec/ghidraRun'
 
+# Setting the default pager for man pages
+alias less="less -R --use-color \
+  -Dd+203 \
+  -Du+75  \
+  -DS+203 \
+  -DP+110 \
+  -DE+203 \
+  -DN+173"
 ############# in3000 sshfs specific.
 alias mount_in3000='sshfs ifi:in3000 ~/dev/in3000 \
 -o reconnect,ServerAliveInterval=15,ServerAliveCountMax=3 \
