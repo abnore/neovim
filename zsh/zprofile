@@ -1,0 +1,18 @@
+# typeset declares attributes on variables. -U -> unique elements only
+typeset -U PATH
+
+# Homebrew
+export PATH="/opt/homebrew/bin:/opt/homebrew/sbin:$PATH"
+
+# User-installed tools
+export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/.cargo/bin:$PATH"
+
+# All commands have been installed with the prefix "g".
+# If you need to use these commands with their normal names, you
+# can add a "gnubin" directory to your PATH from your bashrc like:
+#   PATH="/opt/homebrew/opt/libtool/libexec/gnubin:$PATH"
+
+# Homebrew headers and libraries (needed for autotools builds)
+export CPPFLAGS="-I/opt/homebrew/include"
+export LDFLAGS="-L/opt/homebrew/lib"

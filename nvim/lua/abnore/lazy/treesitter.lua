@@ -6,7 +6,8 @@ return
         build = ":TSUpdate",
         config = function()
             require("nvim-treesitter").install({
-                "vimdoc", "asm", "javascript", "typescript", "c", "cpp",
+                "vimdoc", --"asm",-- using local
+                "javascript", "typescript", "c", "cpp",
                 "lua", "rust", "jsdoc", "bash", "go", "python", "make"
             }):wait(3000)
 

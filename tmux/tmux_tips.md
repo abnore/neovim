@@ -75,13 +75,16 @@ git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
 ## Useful Snippets
 
-Add this to you `.zshrc` to always work in a Tmux session:
+Add this to you `.zshrc` or `.zprofile` to always work in a Tmux session:
 
 ```shell
-# Always work in a tmux session if Tmux is installed
-if which tmux 2>&1 >/dev/null; then
-  if [ $TERM != "screen-256color" ] && [  $TERM != "screen" ]; then
-    tmux attach -t default || tmux new -s default; exit
-  fi
+# Always work inside a tmux session in zsh
+if [[ -z $TMUX ]]; then
+    tmux has-session > /dev/null 2>&1
+    if [[ $? -ne 0 ]]; then
+        exec tmux new -s default
+    else
+        exec tmux attach
+    fi
 fi
 ```
