@@ -15,9 +15,12 @@ vim.keymap.set("i", "<C-c>", "<Esc>")
 -- Remove highlighting
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 
+-- Jump to alternate file
+vim.keymap.set("n", "<leader>n", ":e #<CR>", { silent=true, desc = ":help CTRL-6"})
+
 -- Saving and exiting
-vim.keymap.set( "n", "<leader>w", vim.cmd.w, { desc = "Save file"})
-vim.keymap.set( "n", "<leader>q", vim.cmd.q, { desc = "Quit nvim"})
+vim.keymap.set("n", "<leader>w", vim.cmd.w, { desc = "Save file"})
+vim.keymap.set("n", "<leader>q", vim.cmd.q, { desc = "Quit nvim"})
 
 -- File / navigation
 vim.keymap.set("n", "-", "<cmd>Oil --float<CR>", { desc = "Open parent directory" })
@@ -66,6 +69,7 @@ vim.keymap.set(
   [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]]
 )
 
+-- Toggles visually showing trailing whitespace
 vim.keymap.set("n", "<leader>tl", function()
   vim.opt.list = not vim.opt.list:get()
 end, { desc = "Toggle list / trailing whitespace" })
@@ -76,7 +80,6 @@ vim.keymap.set("n", "<leader>ca", function()
   require("cellular-automaton").start_animation("make_it_rain")
 end)
 
--- Remember CTRL + 6 - maybe make a mapping later
 -- ================
 -- Pick Mapping
 vim.keymap.set("n", "<leader><leader>", function()

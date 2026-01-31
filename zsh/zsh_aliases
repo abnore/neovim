@@ -6,6 +6,7 @@ alias movies='cd ~/Movies'
 alias downloads='cd ~/Downloads'
 alias c='clear'
 alias ta='uio && cd TA'
+alias new=':>'
 
 alias srcsh='source ~/.zshrc'
 alias edit='nvim ~/.zshrc'
