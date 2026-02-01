@@ -12,8 +12,8 @@ vim.keymap.set("i", "Æ", "]")
 -- Insert-mode escape
 vim.keymap.set("i", "<C-c>", "<Esc>")
 
--- Remove highlighting
-vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
+-- Remove highlighting with ;
+vim.keymap.set("n", ";", "<cmd>nohlsearch<CR>")
 
 -- Jump to alternate file
 vim.keymap.set("n", "<leader>n", ":e #<CR>", { silent=true, desc = ":help CTRL-6"})
@@ -41,6 +41,7 @@ vim.keymap.set("n", "N", "Nzzzv")
 -- Yank to system clipboard and paste from system clipboard
 vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])
 vim.keymap.set("n", "<leader>p", [["+p]])
+
 -- Paste in visual mode, overwrite without overwriting register
 vim.keymap.set("v", "<leader>p", [["_dP]])
 
@@ -63,9 +64,7 @@ vim.keymap.set("n", "Q", "<nop>")
 vim.keymap.set("i", "<C-b>", "{}<Left><CR><ESC>O", { silent = true })
 
 -- Search & replace word under cursor
-vim.keymap.set(
-  "n",
-  "<leader>s",
+vim.keymap.set( "n", "<leader>s",
   [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]]
 )
 
