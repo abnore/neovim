@@ -1,3 +1,12 @@
+# ------------------------------------------------------------------------------
+# ~/.bash_aliases
+#
+# All the custom aliases separated from config
+#
+# Sourced in .bashrc and only in interactive sessions
+#
+# ------------------------------------------------------------------------------
+
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
@@ -10,7 +19,9 @@ alias new=':>'
 
 alias srcsh='source ~/.bashrc'
 alias edit='nvim ~/.bashrc'
+alias bashrc='nvim ~/.bashrc'
 alias aliases='nvim ~/.bash_aliases'
+alias profile='nvim ~/.bash_profile'
 alias vim=nvim
 
 alias ll='ls -l'
@@ -24,7 +35,6 @@ alias grep='grep --color=auto'
 alias weather='curl wttr.in'
 alias ghidra='/opt/homebrew/Cellar/ghidra/12.0/libexec/ghidraRun'
 
-# Setting the default pager for man pages
 alias less="less -R --use-color \
   -Dd+203 \
   -Du+75  \
@@ -32,11 +42,12 @@ alias less="less -R --use-color \
   -DP+110 \
   -DE+203 \
   -DN+173"
+
 ############# in3000 sshfs specific.
-alias mount_in3000='sshfs ifi:in3000 ~/dev/in3000 \
--o reconnect,ServerAliveInterval=15,ServerAliveCountMax=3 \
--o defer_permissions \
--o ssh_command="ssh -o ControlMaster=no -o ControlPath=none -o TCPKeepAlive=no"'
+alias mount_in3000='sshfs ifi:in3000 ~/dev/in3000                    \
+        -o reconnect,ServerAliveInterval=15,ServerAliveCountMax=3    \
+        -o defer_permissions -o ssh_command="ssh -o ControlMaster=no \
+        -o ControlPath=none -o TCPKeepAlive=no"'
 alias unmount_in3000='umount -f ~/dev/in3000'
 ####################################
 
@@ -44,19 +55,21 @@ alias unmount_in3000='umount -f ~/dev/in3000'
 alias f='find . -iname'
 
 # Safe operations
-alias cp='cp -i'
-alias mv='mv -i'
-alias rm='rm -i'
+alias cp='cp -iv'
+alias mv='mv -iv'
+alias rm='rm -iv'
 
-# Directory creation and enter
-md() { 
+# FUNCTIONS
+# --- Directory creation and enter
+md() {
     if [[ -z "$1" ]]; then
         printf "[Error] You have to give a name\n\tmd <dirname>\n"
         return 1
     fi
-    mkdir -p "$1" && cd "$1"; 
+    mkdir -p "$1" && cd "$1";
 }
 
+# --- Show numbers with appropriate commas
 commas() {
     local num="$1"
     local result=""
@@ -76,6 +89,7 @@ commas() {
     printf "%s%s%s\n" "$sign" "$num" "$result"
 }
 
+# --- Show seconds in days, hours and minutes
 seconds() {
     local T=$1
     local D=$((T/86400))
@@ -90,6 +104,7 @@ seconds() {
     printf '%d seconds\n' "$S"
 }
 
+# --- convert between F and C
 degrees() {
     local value=$1
     local celsius=0
@@ -102,5 +117,31 @@ degrees() {
     else
         local C=$(( (value - 32) / 1.8 ))
         printf '%.1f°F is %.1f°C\n' "$value" "$C"
+    fi
+}
+
+# --- archive extraction
+ex () {
+    if [[ -f "$1" ]]; then
+        case "$1" in
+            *.tar.bz2)  tar xjf "$1"      ;;
+            *.tar.gz)   tar xzf "$1"      ;;
+            *.bz2)      bunzip2 "$1"      ;;
+            *.rar)      unrar x "$1"      ;;
+            *.gz)       gunzip "$1"       ;;
+            *.tar)      tar xf "$1"       ;;
+            *.tbz2)     tar xjf "$1"      ;;
+            *.tgz)      tar xzf "$1"      ;;
+            *.zip)      unzip "$1"        ;;
+            *.Z)        uncompress "$1"   ;;
+            *.7z)       7z x "$1"         ;;
+            *.deb)      ar x "$1"         ;;
+            *.tar.xz)   tar xf "$1"       ;;
+            *.tar.zst)  unzstd "$1"       ;;
+            *)
+                echo "'$1' cannot be extracted via ex()" ;;
+        esac
+    else
+        echo "'$1' is not a valid file"
     fi
 }
