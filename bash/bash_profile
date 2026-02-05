@@ -29,12 +29,16 @@ path_prepend() {
 }
 
 # --- PATH variable, export once
-export PATH
-path_prepend "/opt/homebrew/bin"
-path_prepend "/opt/homebrew/sbin"
-path_prepend "$HOME/.local/bin"
-path_prepend "$HOME/.cargo/bin"
+PATH="/usr/bin:/bin:/usr/sbin:/sbin"
+
+path_prepend "/usr/local/bin"
 path_prepend "/opt/homebrew/opt/libtool/libexec/gnubin"
+path_prepend "$HOME/.cargo/bin"
+path_prepend "$HOME/.local/bin"
+path_prepend "/opt/homebrew/sbin"
+path_prepend "/opt/homebrew/bin"
+
+export PATH
 
 # --- Homebrew headers and libraries (needed for autotools builds)
 export CPPFLAGS="-I/opt/homebrew/include"
