@@ -10,8 +10,9 @@ if not vim.loop.fs_stat(lazypath) then
         lazypath,
     })
 end
+
 vim.opt.rtp:prepend(lazypath)
-require("lazy").setup("abnore.lazy", { 
+require("lazy").setup("abnore.lazy", {
     change_detection = {
         enabled = false,
         notify = false,

@@ -43,7 +43,16 @@ alias less="less -R --use-color \
   -DE+203 \
   -DN+173"
 
-############# in3000 sshfs specific.
+############# in3000 specific.
+# --- send a file over scp
+send(){
+    if [[ -z "$1" ]]; then
+        printf "[Error] you have to send something!\n"
+        return 1
+    fi
+    scp -- "$1" ifi:~/in3000/2026/RETTER;
+}
+
 alias mount_in3000='sshfs ifi:in3000 ~/dev/in3000                    \
         -o reconnect,ServerAliveInterval=15,ServerAliveCountMax=3    \
         -o defer_permissions -o ssh_command="ssh -o ControlMaster=no \
@@ -66,9 +75,8 @@ md() {
         printf "[Error] You have to give a name\n\tmd <dirname>\n"
         return 1
     fi
-    mkdir -p "$1" && cd "$1";
+    mkdir -p -- "$1" && cd "$1";
 }
-
 # --- Show numbers with appropriate commas
 commas() {
     local num="$1"
@@ -88,7 +96,6 @@ commas() {
 
     printf "%s%s%s\n" "$sign" "$num" "$result"
 }
-
 # --- Show seconds in days, hours and minutes
 seconds() {
     local T=$1
@@ -103,41 +110,36 @@ seconds() {
     (( D > 0 || H > 0 || M > 0 )) && printf 'and '
     printf '%d seconds\n' "$S"
 }
-
 # --- convert between F and C
 degrees() {
     local value=$1
     local celsius=0
-
     [[ "$2" == "-c" ]] && celsius=1
 
     if (( celsius )); then
-        local F=$(( value * 1.8 + 32 ))
-        printf '%.1f°C is %.1f°F\n' "$value" "$F"
+        awk -v v="$value" 'BEGIN { printf "%.1f°C is %.1f°F\n", v, v*9/5+32 }'
     else
-        local C=$(( (value - 32) / 1.8 ))
-        printf '%.1f°F is %.1f°C\n' "$value" "$C"
+        awk -v v="$value" 'BEGIN { printf "%.1f°F is %.1f°C\n", v, (v-32)*5/9 }'
     fi
 }
-
 # --- archive extraction
-ex () {
+ex(){
     if [[ -f "$1" ]]; then
         case "$1" in
-            *.tar.bz2)  tar xjf "$1"      ;;
-            *.tar.gz)   tar xzf "$1"      ;;
-            *.bz2)      bunzip2 "$1"      ;;
-            *.rar)      unrar x "$1"      ;;
-            *.gz)       gunzip "$1"       ;;
-            *.tar)      tar xf "$1"       ;;
-            *.tbz2)     tar xjf "$1"      ;;
-            *.tgz)      tar xzf "$1"      ;;
-            *.zip)      unzip "$1"        ;;
-            *.Z)        uncompress "$1"   ;;
-            *.7z)       7z x "$1"         ;;
-            *.deb)      ar x "$1"         ;;
-            *.tar.xz)   tar xf "$1"       ;;
-            *.tar.zst)  unzstd "$1"       ;;
+            *.tar.bz2)  tar xjf "$1"    ;;
+            *.tar.gz)   tar xzf "$1"    ;;
+            *.bz2)      bunzip2 "$1"    ;;
+            *.rar)      unrar x "$1"    ;;
+            *.gz)       gunzip "$1"     ;;
+            *.tar)      tar xf "$1"     ;;
+            *.tbz2)     tar xjf "$1"    ;;
+            *.tgz)      tar xzf "$1"    ;;
+            *.zip)      unzip "$1"      ;;
+            *.Z)        uncompress "$1" ;;
+            *.7z)       7z x "$1"       ;;
+            *.deb)      ar x "$1"       ;;
+            *.tar.xz)   tar xf "$1"     ;;
+            *.tar.zst)  unzstd "$1"     ;;
             *)
                 echo "'$1' cannot be extracted via ex()" ;;
         esac
