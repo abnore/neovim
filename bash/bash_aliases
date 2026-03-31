@@ -7,27 +7,21 @@
 #
 # ------------------------------------------------------------------------------
 
-alias ..='cd ..'
-alias ...='cd ../..'
-alias ....='cd ../../..'
-alias uio='cd ~/Documents/UIO/02_master/8_semester'
-alias movies='cd ~/Movies'
-alias downloads='cd ~/Downloads'
 alias c='clear'
-alias ta='uio && cd TA'
 alias new=':>'
-
 alias srcsh='source ~/.bashrc'
-alias edit='nvim ~/.bashrc'
 alias bashrc='nvim ~/.bashrc'
 alias aliases='nvim ~/.bash_aliases'
 alias profile='nvim ~/.bash_profile'
 alias vim=nvim
-
+alias n=nvim
+alias retter='cd ~/IN3000-retter'
 alias ll='ls -l'
 alias la='ls -Aohp'
 alias l.='ls -dp .*'
 alias ll.='ls -dlp .*'
+
+alias frameworks="cd $(xcrun --show-sdk-path)/System/Library/Frameworks"
 
 alias cat='bat -p'
 alias please='sudo $(fc -ln -1)'
@@ -43,14 +37,21 @@ alias less="less -R --use-color \
   -DE+203 \
   -DN+173"
 
-############# in3000 specific.
-# --- send a file over scp
+############# in3000 specific
+# --- send a file over scp, create a directory and place it there
 send(){
+    local path="~/in3000/2026/RETTER"
     if [[ -z "$1" ]]; then
         printf "[Error] you have to send something!\n"
         return 1
     fi
-    scp -- "$1" ifi:~/in3000/2026/RETTER;
+    local file=$(basename "$1")
+    local prefix="${file%%[[:alpha:]]*}" # isolate up to the first alpha
+    local name="${file#$prefix}" # remove prefix from the left
+    name="${name%%.*}" # remove everything from, and after, the first '.'
+
+    ssh ifi "cd $path; rm -rf $name; mkdir $name"
+    scp -- "$1" ifi:"$path/$name/"
 }
 
 alias mount_in3000='sshfs ifi:in3000 ~/dev/in3000                    \

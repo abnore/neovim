@@ -18,10 +18,10 @@
 # ---- interactive shell only!
 [[ $- != *i* ]] && return
 
-# ---- tmux auto-start. without exec (so we can exit without closing)
+# ---- tmux auto-start, without exec (so we can exit without closing)
 if [[ -z $TMUX ]]; then
-    tmux has-session > /dev/null 2>&1
-    if (( $? != 0 )); then
+    tmux has-session 2> /dev/null
+    if (( $? )); then
         tmux new -s Session
     else
         tmux attach
@@ -30,7 +30,7 @@ fi
 
 # ---- Source aliases
 if [[ -f ~/.bash_aliases ]]; then
-    . ~/.bash_aliases
+    source ~/.bash_aliases
 fi
 
 # ---- bash completion
@@ -44,8 +44,7 @@ if [[ -f /opt/homebrew/etc/bash_completion.d/git-prompt.sh ]]; then
 fi
 
 export CLICOLOR=1
-export LSCOLORS=ExGxBxDxCxEgEdxbxgxcxd
-#export LSCOLORS=fxexcxdxbxegedabagacad
+export LSCOLORS=exGxBxDxCxEgEdxbxgxcxd # man ls /LSCOLORS
 
 # ---- prompt
 # Kanagawa-inspired colors
@@ -58,29 +57,26 @@ export GIT_PS1_SHOWDIRTYSTATE=1
 export GIT_PS1_SHOWUNTRACKEDFILES=1
 export GIT_PS1_SHOWCOLORHINTS=1
 
-# Special Characters for PS1 prompt
-# \h - hostname up to the first
-# \n - new line
-# \s - the name of the shell
-# \t - the current time in 24-hour format
-# \u - the username of the current user
-# \w - current working dir
-# \W - basename of the current working dir
 PS1="${C_USER}\u:${C_PATH}\W/${C_RST}\$(__git_ps1 ' (%s)') ${C_CUR}\$${C_RST} "
 PS2="${C_CUR}\$ ${C_RST}"
 
-#export MANPAGER="nvim +Man!"
-export MANPAGER="less -R --use-color \
-  -Dd+203 \
-  -Du+75  \
-  -DS+203 \
-  -DP+110 \
-  -DE+203 \
-  -DN+173"
+export MANPAGER="nvim +Man!"
+# export MANPAGER="less -R --use-color \
+#   -Dd+203 \
+#   -Du+75  \
+#   -DS+203 \
+#   -DP+110 \
+#   -DE+203 \
+#   -DN+173"
 
 # ---- readline
 bind '"\e[A": history-search-backward'
 bind '"\e[B": history-search-forward'
 bind 'set completion-ignore-case on'
+bind 'set show-all-if-ambiguous on'
 bind 'TAB:menu-complete'
 bind '"\C-x\C-e": edit-and-execute-command'
+
+# ---- shell options --- help shopt, man bash under builtins
+shopt -s autocd
+shopt -s direxpand

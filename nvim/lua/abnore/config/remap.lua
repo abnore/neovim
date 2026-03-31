@@ -1,14 +1,6 @@
 -- Leader
 vim.g.mapleader = " "
 
--- Special characters
-vim.keymap.set("i", "å", "\\")
-vim.keymap.set("i", "Å", "|")
-vim.keymap.set("i", "ø", "{")
-vim.keymap.set("i", "Ø", "[")
-vim.keymap.set("i", "æ", "}")
-vim.keymap.set("i", "Æ", "]")
-
 -- Insert-mode escape
 vim.keymap.set("i", "<C-c>", "<Esc>")
 

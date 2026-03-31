@@ -17,6 +17,12 @@ export EDITOR=nvim
 export HOMEBREW_NO_ENV_HINTS=1
 export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
 
+# --- cd will search through paths first - increasing the scope
+export CDPATH="$HOME/Documents"
+CDPATH+=":$HOME/Documents/UIO/02_master/8_semester"
+CDPATH+=":$HOME/dev"
+CDPATH+=":$HOME/Documents/UIO/01_bachelor/6_semester/in3000"
+
 export LANG=C.UTF-8
 unset LC_ALL
 
@@ -33,6 +39,7 @@ PATH="/usr/bin:/bin:/usr/sbin:/sbin"
 
 path_prepend "/usr/local/bin"
 path_prepend "/opt/homebrew/opt/libtool/libexec/gnubin"
+path_prepend "/opt/homebrew/opt/make/libexec/gnubin"
 path_prepend "$HOME/.cargo/bin"
 path_prepend "$HOME/.local/bin"
 path_prepend "/opt/homebrew/sbin"
@@ -47,5 +54,3 @@ export LDFLAGS="-L/opt/homebrew/lib"
 if [[ -f ~/.bashrc ]]; then
     source ~/.bashrc
 fi
-
-readonly PATH

@@ -24,7 +24,7 @@ vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
 vim.opt.wrap = true
 vim.opt.scrolloff = 8
-vim.opt.colorcolumn = { 85 }
+vim.opt.colorcolumn = { 81 }
 
 vim.opt.swapfile = false
 vim.opt.backup = false

@@ -3,7 +3,7 @@ return {
     version = false,
     opts = {
         mappings = {
-            move_down      = '<C-j>',
+            move_down      = '<C-n>',
             move_up        = '<C-k>',
         }
     },
