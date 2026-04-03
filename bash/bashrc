@@ -57,7 +57,7 @@ export GIT_PS1_SHOWDIRTYSTATE=1
 export GIT_PS1_SHOWUNTRACKEDFILES=1
 export GIT_PS1_SHOWCOLORHINTS=1
 
-PS1="${C_USER}\u:${C_PATH}\W/${C_RST}\$(__git_ps1 ' (%s)') ${C_CUR}\$${C_RST} "
+PS1="${C_USER}&rea§:${C_PATH}\W/${C_RST}\$(__git_ps1 ' (%s)')${C_CUR}>_ ${C_RST} "
 PS2="${C_CUR}\$ ${C_RST}"
 
 export MANPAGER="nvim +Man!"

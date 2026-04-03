@@ -17,11 +17,12 @@ export EDITOR=nvim
 export HOMEBREW_NO_ENV_HINTS=1
 export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
 
-# --- cd will search through paths first - increasing the scope
-export CDPATH="$HOME/Documents"
+# --- cd will search through paths first - increasing the scope, starting with
+# --- current dir ./ and then at select locations
+export CDPATH="./"
+CDPATH+=":$HOME/Documents"
 CDPATH+=":$HOME/Documents/UIO/02_master/8_semester"
 CDPATH+=":$HOME/dev"
-CDPATH+=":$HOME/Documents/UIO/01_bachelor/6_semester/in3000"
 
 export LANG=C.UTF-8
 unset LC_ALL

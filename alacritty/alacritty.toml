@@ -16,5 +16,5 @@ blur = true
 save_to_clipboard = true
 
 [font]
-normal.family = "MesloLGS Nerd Font Mono"
-size = 15
+normal.family = "Iosevka Nerd Font"
+size = 17
